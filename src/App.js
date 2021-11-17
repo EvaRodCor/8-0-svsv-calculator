@@ -4,8 +4,8 @@ import Display from './components/Display';
 
 
 class App extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
       input: "",
       previousValue: "",
@@ -16,7 +16,7 @@ class App extends Component {
   
   addUserInput = (event) => {
   this.setState({
-    input: this.state.input + event.target.value
+    input: this.state.input + event.target.value,
     })
   }
   
@@ -40,14 +40,10 @@ addOperation = (event) => {
   this.setState({
     previousValue: this.state.input,
     input: "",
-    result: Number(this.state.input) + Number(this.state.previousValue),
     operation: "add",
+    result: Number(this.state.previousValue) + Number(this.state.input)
     })
-  } else if (event.target.value.includes("equal")) {
-    this.setState({
-      input: Number(this.state.previousValue) + Number(this.state.input),
-    })
-  }
+  } 
 }
 
 subtractOperation = (event) => {
@@ -55,10 +51,10 @@ subtractOperation = (event) => {
   this.setState({
     previousValue: this.state.input,
     input: "",
-    result: Number(this.state.previousValue) - Number(this.state.input), 
     operation: "subtract",
+    result: Number(this.state.previousValue) - Number(this.state.input)
     })
-} 
+  } 
 }
 
 divideOperation = (event) => {
@@ -66,8 +62,8 @@ divideOperation = (event) => {
   this.setState({
     previousValue: this.state.input,
     input: "",
-    result: Number(this.state.previousValue) / Number(this.state.input),
-    operation: "divide"
+    operation: "divide",
+    result: Number(this.state.previousValue) / Number(this.state.input)
     })
   }
 }
@@ -78,20 +74,19 @@ multiplyOperation = (event) => {
   this.setState({
     previousValue: this.state.input,
     input: "",
-    result: Number(this.state.previousValue) * Number(this.state.input),
-    operation: "multiply"
+    operation: "multiply",
+    result: Number(this.state.previousValue) * Number(this.state.input)
     })
   }
 }
 
 
-equalOperator = (event) => {
+equalOperator = () => {
   if (this.state.operation === "add") {
     this.setState({
         previousValue: this.state.input,
         input: "",
-        result: Number(this.state.input) + Number(this.state.previousValue),
-        operation: "add",
+        result: Number(this.state.previousValue) + Number(this.state.input),
     })
   } 
 
@@ -99,7 +94,7 @@ equalOperator = (event) => {
     this.setState({
         previousValue: this.state.input,
         input: "",
-        result: Number(this.state.previousValue) - Number(this.state.input),
+        result: Number(this.state.previousValue) - Number(this.state.input)
     })
   }
 
@@ -107,8 +102,7 @@ equalOperator = (event) => {
     this.setState({
       previousValue: this.state.input,
       input: "",
-      result: Number(this.state.previousValue) / Number(this.state.input),
-      operation: "divide"
+      result: Number(this.state.previousValue) / Number(this.state.input)
     })
   
   } 
@@ -117,8 +111,7 @@ equalOperator = (event) => {
     this.setState({
       previousValue: this.state.input,
       input: "",
-      result: Number(this.state.previousValue) * Number(this.state.input),
-      operation: "multiply"
+      result: Number(this.state.previousValue) * Number(this.state.input)
       })
     }
 }
@@ -132,7 +125,7 @@ render() {
   <div className="app">
       <div className="container">
 
-        <Display input={this.state.input} result={this.state.result}/>
+        <Display result={this.state.result} input={this.state.input}/>
 
         <div className="row">
           <button value="7" onClick={this.addUserInput}>7</button>
